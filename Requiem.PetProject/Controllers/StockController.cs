@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Requiem.PetProject.Data;
+using Requiem.PetProject.DTOs.Stock;
 using Requiem.PetProject.Mappers;
 
 namespace Requiem.PetProject.Controllers;
@@ -35,6 +36,12 @@ public class StockController : ControllerBase
         }
         
         return Ok(stock.ToStockDto());
+    }
+
+    [HttpPost]
+    public IActionResult Create([FromBody] CreateStockRequestDto stockDto)
+    {
+        return Ok();
     }
     
 }
