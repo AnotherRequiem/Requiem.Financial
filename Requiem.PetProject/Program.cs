@@ -1,5 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Requiem.PetProject.Data;
+using Requiem.PetProject.Interfaces;
+using Requiem.PetProject.Models;
+using Requiem.PetProject.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,10 +11,13 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+
+builder.Services.AddScoped<IStockRepository, StockRepository>();
 
 var app = builder.Build();
 
