@@ -11,12 +11,10 @@ namespace Requiem.PetProject.Controllers;
 [ApiController]
 public class StockController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
     private readonly IStockRepository _stockRepository;
     
     public StockController(ApplicationDbContext context, IStockRepository stockRepository)
     {
-        _context = context;
         _stockRepository = stockRepository;
     }
 
@@ -26,7 +24,7 @@ public class StockController : ControllerBase
         var stocks = await _stockRepository.GetAllAsync();
         var stockDto = stocks.Select(s => s.ToStockDto());
 
-        return Ok(stocks);
+        return Ok(stockDto);
     }
 
     [HttpGet("{id}")]

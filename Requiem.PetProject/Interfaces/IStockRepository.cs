@@ -14,4 +14,6 @@ public interface IStockRepository
     Task<Stock> UpdateAsync(Guid id, UpdateStockRequestDto stockDto);
 
     Task<Stock> DeleteAsync(Guid id);
+
+    Task<bool> StockExists(Guid id);
 }
