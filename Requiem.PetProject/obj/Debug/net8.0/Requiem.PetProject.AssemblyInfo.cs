@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Requiem.PetProject")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+9f682a2f36d9fe194958befc411966a50b3f0143")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+bf67c127e94fb6750c2cf7bfc64a52ef67683b16")]
 [assembly: System.Reflection.AssemblyProductAttribute("Requiem.PetProject")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Requiem.PetProject")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
