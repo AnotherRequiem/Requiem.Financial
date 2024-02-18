@@ -1,11 +1,12 @@
 using Requiem.PetProject.DTOs.Stock;
+using Requiem.PetProject.Helpers;
 using Requiem.PetProject.Models;
 
 namespace Requiem.PetProject.Interfaces;
 
 public interface IStockRepository
 {
-    Task<List<Stock>> GetAllAsync();
+    Task<List<Stock>> GetAllAsync(QueryObject query);
 
     Task<Stock?> GetByIdAsync(Guid id);
 
