@@ -45,13 +45,13 @@ namespace Requiem.PetProject.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "68caf260-7393-4d33-8c33-00cd3309d835",
+                            Id = "fe703e7d-6596-4716-9991-60f73f352754",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "9c6b50e0-0805-4f34-8f53-26ef3d2fb633",
+                            Id = "c0231ca5-b9d4-485a-b1a6-9580005d4b39",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -250,6 +250,21 @@ namespace Requiem.PetProject.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Requiem.PetProject.Models.Portfolio", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("StockId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AppUserId", "StockId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("Portfolios");
+                });
+
             modelBuilder.Entity("Requiem.PetProject.Models.Stock", b =>
                 {
                     b.Property<Guid>("Id")
@@ -342,9 +357,35 @@ namespace Requiem.PetProject.Migrations
                     b.Navigation("Stock");
                 });
 
+            modelBuilder.Entity("Requiem.PetProject.Models.Portfolio", b =>
+                {
+                    b.HasOne("Requiem.PetProject.Models.AppUser", "AppUser")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Requiem.PetProject.Models.Stock", "Stock")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("Requiem.PetProject.Models.AppUser", b =>
+                {
+                    b.Navigation("Portfolios");
+                });
+
             modelBuilder.Entity("Requiem.PetProject.Models.Stock", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Portfolios");
                 });
 #pragma warning restore 612, 618
         }

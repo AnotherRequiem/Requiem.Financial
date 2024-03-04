@@ -2,6 +2,7 @@
 
 namespace Requiem.PetProject.Models;
 
+[Table("Stocks")]
 public class Stock
 {
     public Guid Id { get; set; }
@@ -21,4 +22,6 @@ public class Stock
     public long MarketCap { get; set; }
 
     public List<Comment> Comments { get; set; } = new List<Comment>();
+    
+    public List<Portfolio> Portfolios { get; set; } = new List<Portfolio>();
 }

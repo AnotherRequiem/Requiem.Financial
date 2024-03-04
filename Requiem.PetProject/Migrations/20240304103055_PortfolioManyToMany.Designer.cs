@@ -11,8 +11,8 @@ using Requiem.PetProject.Data;
 namespace Requiem.PetProject.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240227120745_Identity")]
-    partial class Identity
+    [Migration("20240304103055_PortfolioManyToMany")]
+    partial class PortfolioManyToMany
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,20 @@ namespace Requiem.PetProject.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "fe703e7d-6596-4716-9991-60f73f352754",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "c0231ca5-b9d4-485a-b1a6-9580005d4b39",
+                            Name = "User",
+                            NormalizedName = "USER"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -239,6 +253,21 @@ namespace Requiem.PetProject.Migrations
                     b.ToTable("Comments");
                 });
 
+            modelBuilder.Entity("Requiem.PetProject.Models.Portfolio", b =>
+                {
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("TEXT");
+
+                    b.Property<Guid>("StockId")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("AppUserId", "StockId");
+
+                    b.HasIndex("StockId");
+
+                    b.ToTable("Portfolios");
+                });
+
             modelBuilder.Entity("Requiem.PetProject.Models.Stock", b =>
                 {
                     b.Property<Guid>("Id")
@@ -331,9 +360,35 @@ namespace Requiem.PetProject.Migrations
                     b.Navigation("Stock");
                 });
 
+            modelBuilder.Entity("Requiem.PetProject.Models.Portfolio", b =>
+                {
+                    b.HasOne("Requiem.PetProject.Models.AppUser", "AppUser")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Requiem.PetProject.Models.Stock", "Stock")
+                        .WithMany("Portfolios")
+                        .HasForeignKey("StockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Stock");
+                });
+
+            modelBuilder.Entity("Requiem.PetProject.Models.AppUser", b =>
+                {
+                    b.Navigation("Portfolios");
+                });
+
             modelBuilder.Entity("Requiem.PetProject.Models.Stock", b =>
                 {
                     b.Navigation("Comments");
+
+                    b.Navigation("Portfolios");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,8 @@
-﻿namespace Requiem.PetProject.Models;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
+namespace Requiem.PetProject.Models;
+
+[Table("Comments")]
 public class Comment
 {
     public Guid Id { get; set; }
@@ -12,6 +15,5 @@ public class Comment
     
     public Guid? StockId { get; set; }
     
-    //EF navigation property
     public Stock? Stock { get; set; }
 }

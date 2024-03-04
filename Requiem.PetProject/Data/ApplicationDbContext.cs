@@ -11,12 +11,22 @@ public class ApplicationDbContext : IdentityDbContext<AppUser>
     : base(dbContextOptions) { }
 
     public DbSet<Stock> Stocks { get; set; }
-
     public DbSet<Comment> Comments { get; set; }
-
+    public DbSet<Portfolio> Portfolios { get; set; }
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
+
+        builder.Entity<Portfolio>(p => p.HasKey(x => new { x.AppUserId, x.StockId }));
+        builder.Entity<Portfolio>()
+            .HasOne(u => u.AppUser)
+            .WithMany(u => u.Portfolios)
+            .HasForeignKey(p => p.AppUserId);
+        builder.Entity<Portfolio>()
+            .HasOne(s => s.Stock)
+            .WithMany(s => s.Portfolios)
+            .HasForeignKey(s => s.StockId);
+        
 
         List<IdentityRole> roles = new List<IdentityRole>
         {
