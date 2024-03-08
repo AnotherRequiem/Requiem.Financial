@@ -10,6 +10,8 @@ public interface IStockRepository
 
     Task<Stock?> GetByIdAsync(Guid id);
 
+    Task<Stock?> GetBySymbolAsync(string symbol);
+
     Task<Stock> CreateAsync(Stock stockModel);
 
     Task<Stock> UpdateAsync(Guid id, UpdateStockRequestDto stockDto);

@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\1dark\\RiderProjects\\Requiem.PetProject\\Requiem.PetProject\\Requiem.PetProject.csproj": {}
+    "/Users/requiem/Documents/GitHub/Requiem.PetProject/Requiem.PetProject/Requiem.PetProject.csproj": {}
   },
   "projects": {
-    "C:\\Users\\1dark\\RiderProjects\\Requiem.PetProject\\Requiem.PetProject\\Requiem.PetProject.csproj": {
+    "/Users/requiem/Documents/GitHub/Requiem.PetProject/Requiem.PetProject/Requiem.PetProject.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\1dark\\RiderProjects\\Requiem.PetProject\\Requiem.PetProject\\Requiem.PetProject.csproj",
+        "projectUniqueName": "/Users/requiem/Documents/GitHub/Requiem.PetProject/Requiem.PetProject/Requiem.PetProject.csproj",
         "projectName": "Requiem.PetProject",
-        "projectPath": "C:\\Users\\1dark\\RiderProjects\\Requiem.PetProject\\Requiem.PetProject\\Requiem.PetProject.csproj",
-        "packagesPath": "C:\\Users\\1dark\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\1dark\\RiderProjects\\Requiem.PetProject\\Requiem.PetProject\\obj\\",
+        "projectPath": "/Users/requiem/Documents/GitHub/Requiem.PetProject/Requiem.PetProject/Requiem.PetProject.csproj",
+        "packagesPath": "/Users/requiem/.nuget/packages/",
+        "outputPath": "/Users/requiem/Documents/GitHub/Requiem.PetProject/Requiem.PetProject/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\1dark\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/requiem/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -102,7 +100,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
