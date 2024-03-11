@@ -6,7 +6,7 @@ namespace Requiem.PetProject.Interfaces;
 
 public interface IStockRepository
 {
-    Task<List<Stock>> GetAllAsync(QueryObject query);
+    Task<List<Stock>> GetAllAsync(StockQueryObject stockQuery);
 
     Task<Stock?> GetByIdAsync(Guid id);
 

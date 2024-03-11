@@ -1,6 +1,6 @@
 ﻿namespace Requiem.PetProject.Helpers;
 
-public class QueryObject
+public class StockQueryObject
 {
     public string? Symbol { get; set; } = null;
 

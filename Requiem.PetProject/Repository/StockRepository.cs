@@ -16,33 +16,33 @@ public class StockRepository : IStockRepository
         _context = context;
     }
 
-    public async Task<List<Stock>> GetAllAsync(QueryObject query)
+    public async Task<List<Stock>> GetAllAsync(StockQueryObject stockQuery)
     {
-        var stocks = _context.Stocks.Include(c => c.Comments).AsQueryable();
+        var stocks = _context.Stocks.Include(s => s.Comments).ThenInclude(c => c.AppUser).AsQueryable();
 
-        if (!string.IsNullOrWhiteSpace(query.CompanyName))
-            stocks = stocks.Where(s => s.CompanyName.Contains(query.CompanyName));
+        if (!string.IsNullOrWhiteSpace(stockQuery.CompanyName))
+            stocks = stocks.Where(s => s.CompanyName.Contains(stockQuery.CompanyName));
         
-        if (!string.IsNullOrWhiteSpace(query.Symbol))
-            stocks = stocks.Where(s => s.Symbol.Contains(query.Symbol));
+        if (!string.IsNullOrWhiteSpace(stockQuery.Symbol))
+            stocks = stocks.Where(s => s.Symbol.Contains(stockQuery.Symbol));
 
-        if (!string.IsNullOrWhiteSpace(query.SortBy))
+        if (!string.IsNullOrWhiteSpace(stockQuery.SortBy))
         {
-            if (query.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
-                stocks = query.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
+            if (stockQuery.SortBy.Equals("Symbol", StringComparison.OrdinalIgnoreCase))
+                stocks = stockQuery.IsDescending ? stocks.OrderByDescending(s => s.Symbol) : stocks.OrderBy(s => s.Symbol);
             
-            if (query.SortBy.Equals("CompanyName", StringComparison.OrdinalIgnoreCase))
-                stocks = query.IsDescending ? stocks.OrderByDescending(s => s.CompanyName) : stocks.OrderBy(s => s.CompanyName);
+            if (stockQuery.SortBy.Equals("CompanyName", StringComparison.OrdinalIgnoreCase))
+                stocks = stockQuery.IsDescending ? stocks.OrderByDescending(s => s.CompanyName) : stocks.OrderBy(s => s.CompanyName);
         }
 
-        var skipNumber = (query.PageNumber - 1) * query.PageSize;
+        var skipNumber = (stockQuery.PageNumber - 1) * stockQuery.PageSize;
         
-        return await stocks.Skip(skipNumber).Take(query.PageSize).ToListAsync();
+        return await stocks.Skip(skipNumber).Take(stockQuery.PageSize).ToListAsync();
     }
 
     public async Task<Stock?> GetByIdAsync(Guid id)
     {
-        return await _context.Stocks.Include(c => c.Comments).FirstOrDefaultAsync(s => s.Id == id);
+        return await _context.Stocks.Include(c => c.Comments).ThenInclude(c => c.AppUser).FirstOrDefaultAsync(s => s.Id == id);
     }
 
     public async Task<Stock?> GetBySymbolAsync(string symbol)

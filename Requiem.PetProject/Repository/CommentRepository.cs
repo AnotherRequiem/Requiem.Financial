@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Requiem.PetProject.Data;
-using Requiem.PetProject.DTOs.Comment;
+using Requiem.PetProject.Helpers;
 using Requiem.PetProject.Interfaces;
 using Requiem.PetProject.Models;
 
@@ -15,14 +15,22 @@ public class CommentRepository : ICommentRepository
         _context = context;
     }
     
-    public async Task<List<Comment>> GetAllAsync()
+    public async Task<List<Comment>> GetAllAsync(CommentQueryObject commentQuery)
     {
-        return await _context.Comments.ToListAsync();
+        var comments = _context.Comments.Include(a => a.AppUser).AsQueryable();
+
+        if (!string.IsNullOrWhiteSpace(commentQuery.Symbol))
+            comments = comments.Where(s => s.Stock.Symbol == commentQuery.Symbol);
+
+        if (commentQuery.IsDescending == true)
+            comments = comments.OrderByDescending(c => c.CreatedOn);
+        
+        return await comments.ToListAsync();
     }
 
     public async Task<Comment?> GetByIdAsync(Guid id)
     {
-        return await _context.Comments.FindAsync(id);
+        return await _context.Comments.Include(a => a.AppUser).FirstOrDefaultAsync(c => c.Id == id);
     }
 
     public async Task<Comment> CreateAsync(Comment commentModel)

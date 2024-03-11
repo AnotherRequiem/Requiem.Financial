@@ -1,10 +1,11 @@
-﻿using Requiem.PetProject.Models;
+﻿using Requiem.PetProject.Helpers;
+using Requiem.PetProject.Models;
 
 namespace Requiem.PetProject.Interfaces;
 
 public interface ICommentRepository
 {
-    Task<List<Comment>> GetAllAsync();
+    Task<List<Comment>> GetAllAsync(CommentQueryObject commentQuery);
 
     Task<Comment?> GetByIdAsync(Guid id);
 

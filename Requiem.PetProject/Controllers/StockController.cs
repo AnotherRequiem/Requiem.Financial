@@ -20,13 +20,14 @@ public class StockController : ControllerBase
 
     [HttpGet]
     [Authorize]
-    public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
+    public async Task<IActionResult> GetAll([FromQuery] StockQueryObject stockQuery)
     {
         if (!ModelState.IsValid) 
             return BadRequest(ModelState);
         
-        var stocks = await _stockRepository.GetAllAsync(query);
-        var stockDto = stocks.Select(s => s.ToStockDto());
+        var stocks = await _stockRepository.GetAllAsync(stockQuery);
+        
+        var stockDto = stocks.Select(s => s.ToStockDto()).ToList();
 
         return Ok(stockDto);
     }
